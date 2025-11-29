@@ -19,20 +19,16 @@ class FilterTab:
         main_container = ttk.Frame(self.frame)
         main_container.pack(fill=tk.BOTH, expand=True)
         
-        # Убираем canvas и создаем простой фрейм с вертикальным скроллбаром
         container_frame = ttk.Frame(main_container)
         container_frame.pack(fill=tk.BOTH, expand=True)
-        
-        # Создаем скроллбар и текстовое поле для контента
+
         scrollbar = ttk.Scrollbar(container_frame)
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-        
-        # Создаем canvas для скроллинга всего контента
+
         self.canvas = tk.Canvas(container_frame, yscrollcommand=scrollbar.set, bg='white', highlightthickness=0)
         self.canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
         scrollbar.config(command=self.canvas.yview)
         
-        # Создаем фрейм для всего контента
         self.content_frame = ttk.Frame(self.canvas)
         self.canvas_window = self.canvas.create_window((0, 0), window=self.content_frame, anchor="nw")
         
@@ -245,7 +241,6 @@ class FilterTab:
         ttk.Button(filter_form_frame, text="Добавить", 
                   command=self.add_filter).grid(row=0, column=6, padx=10, pady=5)
         
-        # Подсказки
         hints_frame = ttk.Frame(filter_form_frame)
         hints_frame.grid(row=1, column=0, columnspan=7, sticky=tk.W, pady=5)
         
@@ -325,7 +320,6 @@ class FilterTab:
         results_container = ttk.Frame(parent)
         results_container.grid(row=row+1, column=0, columnspan=4, sticky=(tk.W, tk.E, tk.N, tk.S), pady=5)
         
-        # Создаем Treeview для результатов
         self.results_tree = ttk.Treeview(results_container, show='headings', height=8)
         
         # Вертикальный скроллбар
@@ -344,7 +338,6 @@ class FilterTab:
         # Настраиваем вес строки для правильного расширения
         parent.rowconfigure(row+1, weight=1)
 
-    # Остальные методы остаются без изменений...
     def on_field_change(self, event=None):
         self.update_filter_description()
     
